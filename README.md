@@ -1,1 +1,1 @@
-![My Profile](profile.svg)
+![My Profile](./profile.svg)
