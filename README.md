@@ -1,1 +1,1 @@
-![My Profile](./profile.svg)
+<img src="./profile.svg" alt="My Profile" />
