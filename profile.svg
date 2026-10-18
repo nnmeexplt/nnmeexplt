@@ -87,7 +87,7 @@ text, tspan {white-space: pre;}
   <rect width="985" height="580" filter="url(#grain)" opacity="0.04"/>
 
   <g filter="url(#logoGlow)">
-    <image href="skull.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
+    <image href="https://raw.githubusercontent.com/nnmeexplt/nnmeexplt/main/skull.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
   </g>
 
   <rect x="0.5" y="0.5" width="984" height="579" fill="none" stroke="#ffffff" stroke-opacity="0.08" rx="12"/>
