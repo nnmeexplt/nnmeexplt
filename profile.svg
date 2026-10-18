@@ -106,12 +106,10 @@ text, tspan {white-space: pre;}
     <tspan x="40" y="550" class="value">Fascinated by offensive security, low-level systems, and IoT Technology.</tspan>
   </text>
 
-  <text x="945" y="480" text-anchor="end">
-    <tspan class="key">- CONTACT ME</tspan>
-    <tspan x="945" y="510" class="value">nonametester@proton.me</tspan>
-    <tspan x="945" y="530" class="value">nnmestore.pages.dev</tspan>
-    <tspan x="945" y="550" class="value">@nnme.dev</tspan>
-  </text>
+  <text x="945" y="480" text-anchor="end" class="key">- CONTACT ME</text>
+  <text x="945" y="510" text-anchor="end" class="value">nonametester@proton.me</text>
+  <text x="945" y="530" text-anchor="end" class="value">nnmestore.pages.dev</text>
+  <text x="937" y="550" text-anchor="end" class="value">tiktok.com/@nnme.dev</text>
 
 </g>
 </svg>
