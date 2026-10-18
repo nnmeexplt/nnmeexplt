@@ -20,13 +20,11 @@ text, tspan {white-space: pre;}
 <defs>
 <clipPath id="card"><rect width="985" height="580" rx="12"/></clipPath>
 
-<!-- Background Grids -->
 <pattern id="dots" width="56" height="56" patternUnits="userSpaceOnUse">
   <path d="M0 28h56M28 0v56" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="0.5"/>
   <circle cx="28" cy="28" r="1.15" fill="#992222" fill-opacity="0.45"/>
 </pattern>
 
-<!-- Slow Scanline (Brighter) -->
 <linearGradient id="scanSlow" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
   <stop offset="45%" stop-color="#ffffff" stop-opacity="0.03"/>
@@ -35,7 +33,6 @@ text, tspan {white-space: pre;}
   <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
 </linearGradient>
 
-<!-- Fast Scanline -->
 <linearGradient id="scanFast" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
   <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
@@ -44,7 +41,6 @@ text, tspan {white-space: pre;}
   <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
 </linearGradient>
 
-<!-- Glows & Grain -->
 <radialGradient id="glowTop" cx="50%" cy="50%" r="70%">
   <stop offset="0%" stop-color="#992222" stop-opacity="0.16"/>
   <stop offset="68%" stop-color="#992222" stop-opacity="0"/>
@@ -65,7 +61,6 @@ text, tspan {white-space: pre;}
 
 <g clip-path="url(#card)">
   
-  <!-- BACKGROUND EFFECTS -->
   <ellipse cx="492" cy="-10" rx="420" ry="230" fill="url(#glowTop)">
     <animate attributeName="opacity" values="0.55;1;0.55" dur="7s" repeatCount="indefinite"/>
   </ellipse>
@@ -73,7 +68,6 @@ text, tspan {white-space: pre;}
     <animate attributeName="opacity" values="0.4;0.85;0.4" dur="9s" repeatCount="indefinite"/>
   </ellipse>
 
-  <!-- DOUBLE GRID ANIMATION -->
   <rect x="-80" y="-80" width="1145" height="840" fill="url(#dots)">
     <animateTransform attributeName="transform" type="translate" from="0 0" to="56 56" dur="72s" repeatCount="indefinite"/>
   </rect>
@@ -83,7 +77,6 @@ text, tspan {white-space: pre;}
     </rect>
   </g>
 
-  <!-- SCANLINES -->
   <rect width="985" height="140" class="slow-scan">
     <animate attributeName="y" values="-140;580" dur="10s" repeatCount="indefinite"/>
   </rect>
@@ -93,13 +86,10 @@ text, tspan {white-space: pre;}
 
   <rect width="985" height="580" filter="url(#grain)" opacity="0.04"/>
 
-  <!-- CENTER SKULL / LOGO -->
   <g filter="url(#logoGlow)">
-    <!-- Replace with your GIF/Skull Link -->
-    <image href="https://cifertech.net/wp-content/uploads/2026/07/200.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
+    <image href="skull.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
   </g>
 
-  <!-- CARD BORDERS -->
   <rect x="0.5" y="0.5" width="984" height="579" fill="none" stroke="#ffffff" stroke-opacity="0.08" rx="12"/>
   <path d="M8 42 V8 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
   <path d="M943 8 H977 V42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
