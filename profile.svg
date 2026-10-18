@@ -1,90 +1,139 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
-  <defs>
-    <!-- Fonts -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&amp;display=swap');
-      
-      .grid {
-        fill: none;
-        stroke: rgba(255, 255, 255, 0.05);
-        stroke-width: 1;
-      }
-      .dot { fill: rgba(255, 255, 255, 0.15); }
-      
-      .terminal-text {
-        font-family: 'Geist Mono', monospace;
-        font-size: 12px;
-        fill: #cccccc;
-        white-space: pre;
-      }
-      .term-prompt { fill: #ee3a17; font-weight: bold; }
-      .term-quote { fill: #ffffff; font-style: italic; }
-      .term-warning { fill: #ee3a17; font-weight: bold; }
-      .term-label { fill: #666666; }
-      .term-val { fill: #ffffff; }
-      
-      /* Scanline Animation */
-      .scanline {
-        animation: scan 6s linear infinite;
-      }
-      @keyframes scan {
-        0% { transform: translateY(-100px); }
-        100% { transform: translateY(400px); }
-      }
-      
-      /* Rotating Skull Animation */
-      .skull {
-        animation: rotate 20s linear infinite;
-        transform-origin: 200px 200px;
-      }
-      @keyframes rotate {
-        0% { transform: rotateY(0deg); }
-        100% { transform: rotateY(360deg); }
-      }
-    </style>
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono,Consolas,ui-monospace,monospace" width="985px" height="580px" font-size="16px">
+<style>
+@font-face {
+src: local('JetBrains Mono'), local('JetBrainsMono'), local('Consolas');
+font-family: 'JetBrains Mono';
+font-display: swap;
+}
+/* Base text colors */
+.key {fill: #992222;} /* Dark Red Accent */
+.value {fill: #f4f4f5;} /* White */
+.cc {fill: #88888c;} /* Mid Grey for dots and quotes */
+.head {fill: #f4f4f5;}
+text, tspan {white-space: pre;}
+.ascii {font-size: 11px; fill: #f4f4f5;}
 
-    <!-- Grid Pattern -->
-    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" class="grid"/>
-      <circle cx="0" cy="0" r="1.5" class="dot"/>
-    </pattern>
+/* Scanline Colors */
+.slow-scan {fill: url(#scanSlow);}
+.fast-scan {fill: url(#scanFast);}
+</style>
+<defs>
+<clipPath id="card"><rect width="985" height="580" rx="12"/></clipPath>
 
-    <!-- Scanline Gradient -->
-    <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(255,255,255,0)" />
-      <stop offset="50%" stop-color="rgba(255,255,255,0.05)" />
-      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
-    </linearGradient>
-  </defs>
+<!-- Background Grids (Same as original) -->
+<pattern id="dots" width="56" height="56" patternUnits="userSpaceOnUse">
+  <!-- Lines made grey -->
+  <path d="M0 28h56M28 0v56" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="0.5"/>
+  <!-- Dots slightly red -->
+  <circle cx="28" cy="28" r="1.15" fill="#992222" fill-opacity="0.45"/>
+</pattern>
 
-  <!-- BACKGROUND -->
-  <rect width="100%" height="100%" fill="#000000" />
-  <rect width="100%" height="100%" fill="url(#gridPattern)" />
+<!-- Scanline Gradients -->
+<!-- Slow (Grey, thick) -->
+<linearGradient id="scanSlow" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+  <stop offset="45%" stop-color="#ffffff" stop-opacity="0.01"/>
+  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.03"/>
+  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.01"/>
+  <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+
+<!-- Fast (Grey, thin) -->
+<linearGradient id="scanFast" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+  <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
+  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.15"/>
+  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.05"/>
+  <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+
+<!-- Glows & Grain -->
+<radialGradient id="glowTop" cx="50%" cy="50%" r="70%">
+  <stop offset="0%" stop-color="#992222" stop-opacity="0.16"/>
+  <stop offset="68%" stop-color="#992222" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="glowBot" cx="50%" cy="50%" r="70%">
+  <stop offset="0%" stop-color="#992222" stop-opacity="0.10"/>
+  <stop offset="70%" stop-color="#992222" stop-opacity="0"/>
+</radialGradient>
+
+<filter id="grain" x="0%" y="0%" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/>
+</filter>
+<filter id="logoGlow" x="-40%" y="-40%" width="180%" height="180%">
+  <feGaussianBlur stdDeviation="2.4" result="b"/>
+  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+
+<g clip-path="url(#card)">
   
-  <!-- SCANLINE ANIMATION -->
-  <rect x="0" y="0" width="100%" height="60px" fill="url(#scanGrad)" class="scanline" />
+  <!-- BACKGROUND EFFECTS -->
+  <ellipse cx="492" cy="-10" rx="420" ry="230" fill="url(#glowTop)">
+    <animate attributeName="opacity" values="0.55;1;0.55" dur="7s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="860" cy="540" rx="260" ry="190" fill="url(#glowBot)">
+    <animate attributeName="opacity" values="0.4;0.85;0.4" dur="9s" repeatCount="indefinite"/>
+  </ellipse>
 
-  <!-- LEFT SIDE: ROTATING SKULL -->
-  <!-- REPLACE THE URL BELOW WITH YOUR SKULL LINK -->
-  <image class="skull" href="YOUR_SKULL_LINK_HERE.png" x="100" y="100" width="200" height="200" />
-
-  <!-- RIGHT SIDE: TERMINAL TEXT -->
-  <g class="terminal-text" transform="translate(380, 80)">
-    
-    <tspan class="term-prompt" x="0" dy="0">$ whoami → nnmeexplt</tspan>
-    <tspan x="0" dy="25" class="term-quote">"Your bio or motto goes here."</tspan>
-    
-    <tspan x="0" dy="25" class="term-warning">⚠️ Heads up! These are personal projects.</tspan>
-    <tspan x="0" dy="15">One person behind it all, not a company.</tspan>
-    
-    <tspan x="0" dy="30" class="term-label">Builds:</tspan>    <tspan class="term-val"> ESP32, nRF24, RF-Clown</tspan>
-    <tspan x="0" dy="15" class="term-label">Radios:</tspan>    <tspan class="term-val"> Wi-Fi, BLE, Sub-GHz</tspan>
-    <tspan x="0" dy="15" class="term-label">Languages:</tspan> <tspan class="term-val"> C++, Python, HTML</tspan>
-    
-    <tspan x="0" dy="30" class="term-prompt">Contact</tspan>
-    <tspan x="0" dy="15" class="term-label">Email:</tspan>    <tspan class="term-val"> your@email.com</tspan>
-    <tspan x="0" dy="15" class="term-label">Web:</tspan>      <tspan class="term-val"> yourwebsite.com</tspan>
-    <tspan x="0" dy="15" class="term-label">GitHub:</tspan>   <tspan class="term-val"> @yourusername</tspan>
-    
+  <!-- DOUBLE GRID ANIMATION -->
+  <rect x="-80" y="-80" width="1145" height="840" fill="url(#dots)">
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="56 56" dur="72s" repeatCount="indefinite"/>
+  </rect>
+  <g opacity="0.45">
+    <rect x="-80" y="-80" width="1145" height="840" fill="url(#dots)">
+      <animateTransform attributeName="transform" type="translate" from="0 0" to="-56 -40" dur="96s" repeatCount="indefinite"/>
+    </rect>
   </g>
+
+  <!-- SCANLINES -->
+  <!-- Slow Scanline (Height 140, 10 seconds) -->
+  <rect width="985" height="140" class="slow-scan">
+    <animate attributeName="y" values="-140;580" dur="10s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Fast Scanline (Height 30, 3 seconds) -->
+  <rect width="985" height="30" class="fast-scan">
+    <animate attributeName="y" values="-30;580" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <rect width="985" height="580" filter="url(#grain)" opacity="0.04"/>
+
+  <!-- SKULL / LOGO (Left Side) -->
+  <g filter="url(#logoGlow)">
+    <!-- Replace the href below with your skull link -->
+    <image href="YOUR_SKULL_LINK_HERE.png" x="24" y="140" width="340" height="340" opacity="0.9"/>
+  </g>
+
+  <!-- CARD BORDERS -->
+  <rect x="0.5" y="0.5" width="984" height="579" fill="none" stroke="#ffffff" stroke-opacity="0.08" rx="12"/>
+  <path d="M8 42 V8 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M943 8 H977 V42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M8 538 V572 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M943 572 H977 V538" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
+
+  <!-- VERTICAL SEPARATOR -->
+  <line x1="397" y1="22" x2="397" y2="558" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+  <path d="M393 22 H401 M393 558 H401" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
+
+  <!-- RIGHT SIDE TEXT -->
+  <text x="424" y="32" fill="#f4f4f5">
+    <tspan x="424" y="32" class="key">$ whoami</tspan><tspan class="cc"> → </tspan><tspan class="value">nnmeexplt</tspan> ——————————————————————————————————————-—-
+    <tspan x="424" y="62" class="cc">"Your bio or motto goes here."</tspan>
+    
+    <tspan x="424" y="114" class="key">⚠️ Heads up!</tspan><tspan class="value"> These are personal projects.</tspan>
+    <tspan x="424" y="136" class="value">One person behind it all, not a company.</tspan>
+    
+    <tspan x="424" y="252"><tspan class="key">Builds</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">ESP32, nRF24, Hardware</tspan></tspan>
+    <tspan x="424" y="274"><tspan class="key">Radios</tspan>:<tspan class="cc"> .............................. </tspan><tspan class="value">Wi-Fi, BLE, Sub-GHz</tspan></tspan>
+    <tspan x="424" y="296"><tspan class="key">Tools</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">Altium, VSCode, Arduino IDE</tspan></tspan>
+    <tspan x="424" y="318"><tspan class="key">Languages</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">C++, C, Python</tspan></tspan>
+
+    <tspan x="424" y="360" class="key">- Contact</tspan> —————————————————————————————————————————————-—-
+    <tspan x="424" y="382"><tspan class="key">Email</tspan>:<tspan class="cc"> ............................... </tspan><tspan class="value">your@email.com</tspan></tspan>
+    <tspan x="424" y="404"><tspan class="key">Web</tspan>:<tspan class="cc"> ....................................... </tspan><tspan class="value">yourwebsite.com</tspan></tspan>
+    <tspan x="424" y="426"><tspan class="key">TikTok</tspan>:<tspan class="cc"> ...................................... </tspan><tspan class="value">@noname.exploits</tspan></tspan>
+    <tspan x="424" y="448"><tspan class="key">GitHub</tspan>:<tspan class="cc"> ...................................... </tspan><tspan class="value">@yourusername</tspan></tspan>
+  </text>
+</g>
 </svg>
