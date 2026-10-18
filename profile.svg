@@ -9,10 +9,9 @@ font-display: swap;
 /* Base text colors */
 .key {fill: #992222;} /* Dark Red Accent */
 .value {fill: #f4f4f5;} /* White */
-.cc {fill: #88888c;} /* Mid Grey for dots and quotes */
+.cc {fill: #88888c;} /* Mid Grey */
 .head {fill: #f4f4f5;}
 text, tspan {white-space: pre;}
-.ascii {font-size: 11px; fill: #f4f4f5;}
 
 /* Scanline Colors */
 .slow-scan {fill: url(#scanSlow);}
@@ -21,25 +20,22 @@ text, tspan {white-space: pre;}
 <defs>
 <clipPath id="card"><rect width="985" height="580" rx="12"/></clipPath>
 
-<!-- Background Grids (Same as original) -->
+<!-- Background Grids -->
 <pattern id="dots" width="56" height="56" patternUnits="userSpaceOnUse">
-  <!-- Lines made grey -->
   <path d="M0 28h56M28 0v56" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="0.5"/>
-  <!-- Dots slightly red -->
   <circle cx="28" cy="28" r="1.15" fill="#992222" fill-opacity="0.45"/>
 </pattern>
 
-<!-- Scanline Gradients -->
-<!-- Slow (Grey, thick) -->
+<!-- Slow Scanline (Brighter) -->
 <linearGradient id="scanSlow" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-  <stop offset="45%" stop-color="#ffffff" stop-opacity="0.01"/>
-  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.03"/>
-  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.01"/>
+  <stop offset="45%" stop-color="#ffffff" stop-opacity="0.03"/>
+  <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
+  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.03"/>
   <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
 </linearGradient>
 
-<!-- Fast (Grey, thin) -->
+<!-- Fast Scanline -->
 <linearGradient id="scanFast" x1="0" y1="0" x2="0" y2="1">
   <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
   <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
@@ -62,7 +58,7 @@ text, tspan {white-space: pre;}
   <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/>
 </filter>
 <filter id="logoGlow" x="-40%" y="-40%" width="180%" height="180%">
-  <feGaussianBlur stdDeviation="2.4" result="b"/>
+  <feGaussianBlur stdDeviation="4" result="b"/>
   <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
 </filter>
 </defs>
@@ -88,52 +84,53 @@ text, tspan {white-space: pre;}
   </g>
 
   <!-- SCANLINES -->
-  <!-- Slow Scanline (Height 140, 10 seconds) -->
   <rect width="985" height="140" class="slow-scan">
     <animate attributeName="y" values="-140;580" dur="10s" repeatCount="indefinite"/>
   </rect>
-  <!-- Fast Scanline (Height 30, 3 seconds) -->
   <rect width="985" height="30" class="fast-scan">
     <animate attributeName="y" values="-30;580" dur="3s" repeatCount="indefinite"/>
   </rect>
 
   <rect width="985" height="580" filter="url(#grain)" opacity="0.04"/>
 
-  <!-- SKULL / LOGO (Left Side) -->
+  <!-- CENTER SKULL / LOGO -->
   <g filter="url(#logoGlow)">
-    <!-- Replace the href below with your skull link -->
-    <image href="YOUR_SKULL_LINK_HERE.png" x="24" y="140" width="340" height="340" opacity="0.9"/>
+    <!-- Replace with your GIF/Skull Link -->
+    <image href="YOUR_SKULL_LINK_HERE.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
   </g>
 
   <!-- CARD BORDERS -->
   <rect x="0.5" y="0.5" width="984" height="579" fill="none" stroke="#ffffff" stroke-opacity="0.08" rx="12"/>
-  <path d="M8 42 V8 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M943 8 H977 V42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M8 538 V572 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
-  <path d="M943 572 H977 V538" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M8 42 V8 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
+  <path d="M943 8 H977 V42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
+  <path d="M8 538 V572 H42" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
+  <path d="M943 572 H977 V538" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
 
-  <!-- VERTICAL SEPARATOR -->
-  <line x1="397" y1="22" x2="397" y2="558" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
-  <path d="M393 22 H401 M393 558 H401" fill="none" stroke="#992222" stroke-width="1.2" stroke-linecap="square"/>
 
-  <!-- RIGHT SIDE TEXT -->
-  <text x="424" y="32" fill="#f4f4f5">
-    <tspan x="424" y="32" class="key">$ whoami</tspan><tspan class="cc"> → </tspan><tspan class="value">nnmeexplt</tspan> ——————————————————————————————————————-—-
-    <tspan x="424" y="62" class="cc">"Your bio or motto goes here."</tspan>
-    
-    <tspan x="424" y="114" class="key">⚠️ Heads up!</tspan><tspan class="value"> These are personal projects.</tspan>
-    <tspan x="424" y="136" class="value">One person behind it all, not a company.</tspan>
-    
-    <tspan x="424" y="252"><tspan class="key">Builds</tspan>:<tspan class="cc"> .... </tspan><tspan class="value">ESP32, nRF24, Hardware</tspan></tspan>
-    <tspan x="424" y="274"><tspan class="key">Radios</tspan>:<tspan class="cc"> .............................. </tspan><tspan class="value">Wi-Fi, BLE, Sub-GHz</tspan></tspan>
-    <tspan x="424" y="296"><tspan class="key">Tools</tspan>:<tspan class="cc"> ....................... </tspan><tspan class="value">Altium, VSCode, Arduino IDE</tspan></tspan>
-    <tspan x="424" y="318"><tspan class="key">Languages</tspan>:<tspan class="cc"> ................................ </tspan><tspan class="value">C++, C, Python</tspan></tspan>
-
-    <tspan x="424" y="360" class="key">- Contact</tspan> —————————————————————————————————————————————-—-
-    <tspan x="424" y="382"><tspan class="key">Email</tspan>:<tspan class="cc"> ............................... </tspan><tspan class="value">your@email.com</tspan></tspan>
-    <tspan x="424" y="404"><tspan class="key">Web</tspan>:<tspan class="cc"> ....................................... </tspan><tspan class="value">yourwebsite.com</tspan></tspan>
-    <tspan x="424" y="426"><tspan class="key">TikTok</tspan>:<tspan class="cc"> ...................................... </tspan><tspan class="value">@noname.exploits</tspan></tspan>
-    <tspan x="424" y="448"><tspan class="key">GitHub</tspan>:<tspan class="cc"> ...................................... </tspan><tspan class="value">@yourusername</tspan></tspan>
+  <text x="40" y="60">
+    <tspan class="key">$ whoami</tspan><tspan class="cc"> → </tspan><tspan class="value">nnmeexplt</tspan>
+    <tspan x="40" y="85" class="cc">"Tech enthusiast, morally questionable."</tspan>
   </text>
+
+  <text x="945" y="60" text-anchor="end">
+    <tspan class="value">One person behind it all not a company, not an organization.</tspan>
+    <tspan x="945" y="85" class="key">These are personal projects made by me.</tspan>
+  </text>
+
+  <text x="40" y="480">
+    <tspan class="key">- ABOUT ME</tspan>
+    <tspan x="40" y="510" class="value">Tech enthusiast passionate</tspan>
+    <tspan x="40" y="530" class="value">about embedded systems, robotics,</tspan>
+    <tspan x="40" y="550" class="value">IoT, and PCB design.</tspan>
+  </text>
+
+  <text x="945" y="480" text-anchor="end">
+    <tspan class="key">- GET IN TOUCH WITH ME</tspan>
+    <tspan x="945" y="510" class="value">nonametester@proton.me</tspan>
+    <tspan x="945" y="530" class="value">nnmestore.pages.dev</tspan>
+    <tspan x="945" y="550" class="value">@nnme.dev</tspan>
+    <tspan x="945" y="570" class="value">@yourusername</tspan>
+  </text>
+
 </g>
 </svg>
