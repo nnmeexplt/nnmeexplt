@@ -96,7 +96,7 @@ text, tspan {white-space: pre;}
   <!-- CENTER SKULL / LOGO -->
   <g filter="url(#logoGlow)">
     <!-- Replace with your GIF/Skull Link -->
-    <image href="skull.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
+    <image href="https://raw.githubusercontent.com/nnmeexplt/nnmeexplt/main/skull.gif" x="342" y="140" width="300" height="300" opacity="0.95"/>
   </g>
 
   <!-- CARD BORDERS -->
